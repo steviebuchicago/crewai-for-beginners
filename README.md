@@ -22,6 +22,10 @@ CrewAI has three ideas. Everything else is detail.
 
 A crew of agents is a relay team: each task hands its output to the next as context. That handoff is the whole trick — one model's draft becomes another model's input, with a different job title looking at it.
 
+<img src="docs/images/how-a-crew-runs.png" alt="How a crew runs: kickoff, task 1, context handoff, task 2, output" width="100%">
+
+That picture is the entire execution model. `kickoff(inputs=...)` starts the run, each task is a leg of the river, and the context handoff in the middle is where task 1's full output physically arrives inside task 2's prompt. When your crew produces something strange, the answer is almost always somewhere on this river — a vague expected output on leg one, or a handoff carrying more context than leg two needed.
+
 ---
 
 ## The four examples
@@ -81,6 +85,36 @@ This repo's examples were verified by *running them* against 1.15.17, and these 
 7. **Telemetry is on by default.** `CREWAI_DISABLE_TELEMETRY=true` if that matters in your environment — in a regulated shop it does.
 
 None of these are complaints. Every framework has sharp edges; the difference is whether the tutorial you're learning from has actually touched them.
+
+---
+
+## Where CrewAI sits in the landscape
+
+<img src="docs/images/platform-landscape.png" alt="The agent platform landscape: different vessels for different waters" width="100%">
+
+Beginners usually meet CrewAI first and assume the frameworks are interchangeable. They aren't — they're different vessels built for different waters, and knowing which is which will save you from fighting your framework for a month. Here's the honest map as of mid-2026:
+
+| Platform | Built around | Strongest at | Reach for it when |
+| --- | --- | --- | --- |
+| **CrewAI** | Roles and tasks — an organizational metaphor | Fastest path from idea to working multi-agent draft; the largest community (~52k stars, ~5M monthly downloads, ~2B agent executions in the prior year) | The work naturally maps to a team: researcher hands to analyst hands to writer |
+| **LangGraph** | Explicit state machines with checkpointing | Durability — crash recovery, replay, time-travel debugging, approval pauses | "What happens when step 7 fails?" is a product requirement, not an afterthought |
+| **Claude Agent SDK** (Anthropic) | A model with OS-level tools: files, shell, web | Deep system access and the deepest MCP tool integration; coding and operations agents | The agent's job is to *work on a computer* — read files, run commands, produce artifacts |
+| **OpenAI Agents SDK** | Minimal primitives: agents, tools, handoffs, guardrails | The cleanest handoff model in the ecosystem; very light footprint | Triage and routing, where control passes linearly and you want almost no framework |
+| **Microsoft Agent Framework** | The merger of AutoGen and Semantic Kernel (1.0 GA, April 2026) | Enterprise .NET/Python, Azure integration, group-chat deliberation with humans in the loop | You live in the Microsoft stack and need agents your platform team will bless |
+| **Microsoft Copilot Studio** | Low-code agents inside Microsoft 365 | Getting an agent in front of business users without engineers, inside the tenant's governance | The audience is the M365 workforce and IT owns the guardrails |
+| **Google ADK** | Multi-language SDKs (Python, TS, Java, Go) and the A2A protocol | Agent-to-agent interop across teams and languages | A large org where different teams' agents must discover and call each other |
+
+Two smaller ones worth knowing: **Pydantic AI** if what you actually need is guaranteed-schema output from a single agent, and **smolagents** if you want a transparent ~1,000-line core running open-source models.
+
+Three honest observations from using several of these:
+
+**CrewAI's superpower and its trap are the same feature.** The role metaphor gets a beginner to a working system faster than anything else on this list — and it can seduce you into modeling a fixed pipeline as a "team" when a plain sequential script would be cheaper and more predictable. If your agents never make a real decision, you didn't need agents.
+
+**The high-abstraction frameworks defer the governance bill; the low-level ones present it up front.** CrewAI's role definitions are not authorization. LangGraph makes you draw the state machine, which is annoying on day one and priceless in month three. None of them fully solve permissions, audit, or budget for you — that's [example 04](examples/04-governed-crew/), and the theme of [the companion repo](https://github.com/steviebuchicago/agents-are-easy-governance-is-hard).
+
+**Provider-native SDKs trade portability for depth.** The Claude and OpenAI SDKs each do things with their own models that portable frameworks can't match, at the cost of coupling. CrewAI's neutrality — any model via a one-line string — is precisely why it's a good *first* framework: you learn the concepts without marrying a vendor.
+
+Start where your problem lives, not where the loudest tutorial points.
 
 ---
 
