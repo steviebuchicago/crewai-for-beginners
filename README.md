@@ -90,7 +90,7 @@ None of these are complaints. Every framework has sharp edges; the difference is
 
 ## Where CrewAI sits in the landscape
 
-<img src="docs/images/platform-landscape.png" alt="The agent platform landscape: different vessels for different waters" width="100%">
+<img src="docs/images/platform-cards.png" alt="Five frameworks, five jobs: CrewAI, LangGraph, Claude Agent SDK, OpenAI Agents SDK, Microsoft Agent Framework" width="100%">
 
 Beginners usually meet CrewAI first and assume the frameworks are interchangeable. They aren't — they're different vessels built for different waters, and knowing which is which will save you from fighting your framework for a month. Here's the honest map as of mid-2026:
 
@@ -118,6 +118,16 @@ Start where your problem lives, not where the loudest tutorial points.
 
 ---
 
+## From laptop to deployed
+
+When your crew works locally, the next question is how to put it somewhere. The short version: the `crewai` CLI scaffolds projects and deploys them to **CrewAI AMP** (app.crewai.com), where your crew becomes a REST API — `POST /kickoff` with your inputs, poll `/status/{kickoff_id}` for the result.
+
+<img src="docs/images/cli-deploy-commands.png" alt="crewai deploy commands, real CLI output" width="100%">
+
+The full walkthrough — the scaffold wizard, both deploy paths, and the three governance questions to answer *before* anyone depends on your endpoint (including the `human_input=True` trap that hangs every first deployment) — is in **[docs/03 — Deploying Your Crew](docs/03-deploying-your-crew.md)**. Every terminal capture in it is real output from 1.15.17, not a mockup.
+
+---
+
 ## When a crew is the right tool — honestly
 
 Multi-agent is having its moment, which means it's being applied to problems that don't need it. The test:
@@ -136,7 +146,8 @@ And the theme of that companion applies here word for word: **agents are easy, g
 crewai-for-beginners/
 ├── docs/
 │   ├── 01-core-concepts.md          the mental model, in depth
-│   └── 02-troubleshooting.md        the errors you'll actually hit
+│   ├── 02-troubleshooting.md        the errors you'll actually hit
+│   └── 03-deploying-your-crew.md    CLI, CrewAI AMP, and the /kickoff API
 ├── examples/
 │   ├── 01-first-crew/               two agents, zero tools
 │   ├── 02-research-crew/            custom @tool, local knowledge
