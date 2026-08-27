@@ -114,6 +114,9 @@ Task(..., context=[])                # deliberately isolated
 
 An isolated task is a real tool. A fact-checker that cannot see the draft it is checking against is a different, better instrument than one that can.
 
+
+<img src="images/how-a-crew-runs.png" alt="How a crew runs" width="100%">
+
 ## Crew
 
 A Crew is the roster plus the running order, and it owns no intelligence of its own.
