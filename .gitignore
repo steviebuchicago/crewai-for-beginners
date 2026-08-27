@@ -1,0 +1,46 @@
+# Environments
+.venv/
+venv/
+env/
+ENV/
+
+# Secrets -- never commit a key
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# Tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.coverage
+htmlcov/
+
+# Crew output -- audit logs, run artefacts, CrewAI local stores
+audit_log.jsonl
+audit.jsonl
+output/
+out/
+db/
+.crewai/
+logs/
+
+# Editors and OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
