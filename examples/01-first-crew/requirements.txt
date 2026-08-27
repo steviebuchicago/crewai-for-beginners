@@ -1,0 +1,6 @@
+# Verified against crewai 1.15.17 on Python 3.11.
+#
+# CrewAI 1.x talks to model providers through its own native clients, not
+# LiteLLM. The OpenAI client ships as a core dependency; Anthropic is an extra,
+# which is why it is named here. Drop "[anthropic]" if you only use OpenAI.
+crewai[anthropic]>=1.15,<2
