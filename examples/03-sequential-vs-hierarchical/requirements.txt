@@ -1,0 +1,5 @@
+# Verified against crewai 1.15.17 on Python 3.11.
+#
+# Drop "[anthropic]" if you only use OpenAI -- its client is already a core
+# crewai dependency.
+crewai[anthropic]>=1.15,<2
