@@ -1,0 +1,8 @@
+# Verified against crewai 1.15.17 on Python 3.11.
+#
+# governance.py is standard library only, on purpose. Every gate in this example
+# is something you could write yourself in an afternoon -- that is the point.
+#
+# Drop "[anthropic]" if you only use OpenAI; its client is already a core
+# crewai dependency.
+crewai[anthropic]>=1.15,<2
